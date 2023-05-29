@@ -14,3 +14,7 @@ gem "json"
 gem "rake"
 gem "httparty"
 gem "geocoder"
+
+group :test do
+  gem "minitest"
+end

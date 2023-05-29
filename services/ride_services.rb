@@ -1,3 +1,5 @@
+require "geocoder"
+
 class RideServicesError < StandardError; end
 
 class RideServices

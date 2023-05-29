@@ -23,5 +23,11 @@ namespace :db do
     Dir.glob("./database/seeds/*.rb").each { |file| require file }
   end
 
+  # TODO Move this to a separate file
+  desc "Run tests"
+  task :test do
+    Dir.glob("./models/*.rb").each { |file| require file }
+    Dir.glob("./tests/**/*.rb").each { |file| require file }
+  end
 
 end

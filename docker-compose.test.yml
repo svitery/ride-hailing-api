@@ -1,10 +1,10 @@
 version: "3.4"
 
 services:
-  db_postgres:
+  db_test:
     image: postgres:11.5
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_test_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
@@ -12,22 +12,22 @@ services:
 
   sinatra:
     env_file:
-      - .env
+      - test.env
     build:
       context: .
-      target: dev
+      target: test
     ports:
       - "9292:9292"
     volumes:
       - .:/app
     depends_on:
-      - db_postgres
+      - db_test
     networks:
       - local
 
 volumes:
   .:
-  postgres_data:
+  postgres_test_data:
 
 networks:
   local:

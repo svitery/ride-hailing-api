@@ -1,9 +1,11 @@
-FROM ruby:3.2.2
+FROM ruby:3.2.2 as base
 
 RUN mkdir /app
 
 WORKDIR /app
 
-#RUN bundle install
+FROM base as dev
+    CMD ["sh", "scripts/start.sh"]
 
-CMD ["sh", "scripts/start.sh"]
+FROM base as test
+    CMD ["sh", "scripts/test.sh"]
