@@ -11,6 +11,7 @@ Sequel.migration do
       String :phone, null: false
       Float :latitude, null: false
       Float :longitude, null: false
+      Boolean :available, default: true
     end
   end
 end

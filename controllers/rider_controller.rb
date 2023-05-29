@@ -1,24 +1,19 @@
-require "./integrations/payment_provider"
+require "./services/rider_services"
+require "./schemas/payment_method_schemas"
 
 class RiderController < Sinatra::Base
   post "/:id/payment-methods" do
-    rider = Rider[params[:id]]
+    body = JSON.parse(request.body.read)
+    validation = CreatePaymentMethodSchema.new.call(body)
+    halt 400, { error: validation.errors.to_h }.to_json unless validation.success?
+    rider = Rider[:id]
+    tokenized_card = body["tokenized_card"]
     halt 404, { error: "Rider not found" }.to_json unless rider
     begin
-      body = JSON.parse(request.body.read)
-      acceptance_token = PaymentProviderHandler.new.get_acceptance_token
-      payment_method_external_id = PaymentProviderHandler.new.create_payment_method(
-        body["tokenized_card"],
-        rider.email,
-        acceptance_token
-      )
-      payment_method = PaymentMethod.create(
-        rider_id: rider.id,
-        payment_provider_id: payment_method_external_id
-      )
+      payment_method = RiderServices.create_payment_method(rider, tokenized_card)
       status 201
       payment_method.to_json
-    rescue PaymentProviderException => e
+    rescue  => e
       halt 400, { error: e.message }.to_json
     end
   end

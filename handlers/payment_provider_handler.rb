@@ -40,4 +40,30 @@ class PaymentProviderHandler
       raise PaymentProviderException, "Error creating payment method"
     end
   end
+
+  def create_transaction(amount_in_cents, reference, email, payment_source_id, installments)
+    url = "#{@base_url}/transactions"
+    headers = {
+      "Authorization" => "Bearer #{ENV["PAYMENT_PROVIDER_PRIVATE_KEY"]}",
+      "Content-Type" => "application/json"
+    }
+    body = {
+      "amount_in_cents" => amount_in_cents,
+      "currency" => "COP",
+      "customer_email" => email,
+      "payment_method" => {
+        "installments" => 1
+      },
+      "reference" => reference,
+      "payment_source_id" => payment_source_id
+    }
+    response = HTTParty.post(url, headers: headers, body: body.to_json)
+    puts response.body
+    puts response.code
+    if response.code == 201
+      return true
+    else
+      raise PaymentProviderException, "Error creating transaction"
+    end
+  end
 end
