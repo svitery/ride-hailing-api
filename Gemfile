@@ -17,4 +17,8 @@ gem "geocoder"
 
 group :test do
   gem "minitest"
+  gem "simplecov"
+  gem "faker"
+  gem "webmock"
+  gem "rack-test"
 end

@@ -3,6 +3,7 @@ require "./schemas/payment_method_schemas"
 
 class RiderController < Sinatra::Base
   post "/:id/payment-methods" do
+    puts "POST /riders/:id/payment-methods"
     body = JSON.parse(request.body.read)
     validation = CreatePaymentMethodSchema.new.call(body)
     halt 400, { error: validation.errors.to_h }.to_json unless validation.success?
@@ -14,6 +15,7 @@ class RiderController < Sinatra::Base
       status 201
       payment_method.to_json
     rescue  => e
+      puts e.backtrace
       halt 400, { error: e.message }.to_json
     end
   end

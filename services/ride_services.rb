@@ -90,6 +90,8 @@ class RideServices
       # rider that the payment was not processed.
       puts "Error creating transaction in payment provider"
     rescue => e
+      puts e
+      puts e.backtrace
       raise RiderServicesError, "Error creating transaction"
     end
   end
