@@ -1,7 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.4)
+      public_suffix (>= 2.0.2, < 6.0)
     concurrent-ruby (1.2.2)
+    crack (0.4.5)
+      rexml
     docile (1.4.0)
     dotenv (2.8.1)
     dry-configurable (1.0.1)
@@ -39,6 +43,7 @@ GEM
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     geocoder (1.8.1)
+    hashdiff (1.0.1)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -53,12 +58,14 @@ GEM
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.9)
     pg (1.5.3)
+    public_suffix (5.0.1)
     puma (6.2.2)
       nio4r (~> 2.0)
     rack (2.2.7)
     rack-protection (3.0.6)
       rack
     rake (13.0.6)
+    rexml (3.2.5)
     ruby2_keywords (0.0.5)
     sequel (5.68.0)
     sequel-seed (1.1.2)
@@ -81,6 +88,10 @@ GEM
       sinatra (= 3.0.6)
       tilt (~> 2.0)
     tilt (2.1.0)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     zeitwerk (2.6.8)
 
 PLATFORMS
@@ -102,6 +113,7 @@ DEPENDENCIES
   simplecov
   sinatra
   sinatra-contrib
+  webmock
 
 RUBY VERSION
    ruby 3.2.2p53

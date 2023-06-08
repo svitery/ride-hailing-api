@@ -19,4 +19,5 @@ group :test do
   gem "minitest"
   gem "simplecov"
   gem "faker"
+  gem "webmock"
 end
