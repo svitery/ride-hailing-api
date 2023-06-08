@@ -17,4 +17,5 @@ gem "geocoder"
 
 group :test do
   gem "minitest"
+  gem "simplecov"
 end

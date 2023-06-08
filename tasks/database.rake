@@ -26,8 +26,18 @@ namespace :db do
   # TODO Move this to a separate file
   desc "Run tests"
   task :test do
+    require "simplecov"
+    SimpleCov.start do
+      add_filter "/tests/"
+    end
+    DB[:rides].delete
+    DB[:payment_methods].delete
+    DB[:riders].delete
+    DB[:drivers].delete
+
     Dir.glob("./models/*.rb").each { |file| require file }
-    Dir.glob("./tests/**/*.rb").each { |file| require file }
+    Dir.glob("./tests/models/*.rb").each { |file| require file }
+    #Dir.glob("./tests/services/*.rb").each { |file| require file }
   end
 
 end
