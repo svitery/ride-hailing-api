@@ -10,6 +10,10 @@ class PaymentProviderHandlerTest < Minitest::Test
     @payment_provider_handler.instance_variable_set(:@base_url, "http://localhost:3000")
   end
 
+  def teardown
+    WebMock.allow_net_connect!
+  end
+
   def test_get_acceptance_token
     response_body = {
       "data": {

@@ -20,4 +20,5 @@ group :test do
   gem "simplecov"
   gem "faker"
   gem "webmock"
+  gem "rack-test"
 end
