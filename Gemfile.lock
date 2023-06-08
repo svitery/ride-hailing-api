@@ -36,10 +36,14 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
+    faker (3.2.0)
+      i18n (>= 1.8.11, < 2)
     geocoder (1.8.1)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
     json (2.6.3)
     mini_mime (1.1.2)
     minitest (5.18.0)
@@ -85,6 +89,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   dry-validation
+  faker
   geocoder
   httparty
   json

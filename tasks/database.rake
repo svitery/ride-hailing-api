@@ -36,7 +36,7 @@ namespace :db do
     DB[:drivers].delete
 
     Dir.glob("./models/*.rb").each { |file| require file }
-    Dir.glob("./tests/models/*.rb").each { |file| require file }
+    Dir.glob("./tests/**/*.rb").each { |file| require file }
     #Dir.glob("./tests/services/*.rb").each { |file| require file }
   end
 

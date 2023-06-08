@@ -1,17 +1,24 @@
 require "minitest/autorun"
 require "sequel"
+require "faker"
 
 require_relative "../../models/driver"
 
 class DriverTest < Minitest::Test
   def setup
+    @name = Faker::Name.first_name
+    @lastname = Faker::Name.last_name
+    @email = Faker::Internet.email
+    @phone = Faker::PhoneNumber.cell_phone_in_e164
+    @latitude = Faker::Address.latitude.round(6)
+    @longitude = Faker::Address.longitude.round(6)
     @driver = Driver.create(
-      name: "Driver",
-      lastname: "Lastname",
-      email: "driver@email.com",
-      phone: "+1234567890",
-      latitude: 0,
-      longitude: 0,
+      name: @name,
+      lastname: @lastname,
+      email: @email,
+      phone: @phone,
+      latitude: @latitude,
+      longitude: @longitude,
       available: true
     )
   end
@@ -24,21 +31,21 @@ class DriverTest < Minitest::Test
   end
 
   def test_create_driver
-    assert_equal @driver.name, "Driver"
-    assert_equal @driver.lastname, "Lastname"
-    assert_equal @driver.email, "driver@email.com"
-    assert_equal @driver.phone, "+1234567890"
-    assert_equal @driver.latitude, 0
-    assert_equal @driver.longitude, 0
+    assert_equal @driver.name, @name
+    assert_equal @driver.lastname, @lastname
+    assert_equal @driver.email,@email
+    assert_equal @driver.phone, @phone
+    assert_equal @driver.latitude, @latitude
+    assert_equal @driver.longitude, @longitude
   end
 
   def test_update_driver
-    @driver.name = "New Name"
-    @driver.lastname = "New Lastname"
-    @driver.email = "new_email@email.com"
-    @driver.phone = "+0987654321"
-    @driver.latitude = 1
-    @driver.longitude = 1
+    @driver.name = Faker::Name.first_name
+    @driver.lastname = Faker::Name.last_name
+    @driver.email = Faker::Internet.email
+    @driver.phone = Faker::PhoneNumber.cell_phone_in_e164
+    @driver.latitude = Faker::Address.latitude.round(6)
+    @driver.longitude = Faker::Address.longitude.round(6)
     @driver.save
     db_driver = Driver[@driver.id]
     assert_equal db_driver.name, @driver.name
